@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Preguntas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+            background-color: #f0f8ff; /* Fondo suave */
+        }
+        #quiz-container {
+            width: 50%;
+            margin: 0 auto;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+        }
+        .question {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .answers {
+            margin-top: 10px;
+        }
+        .answers button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #b0e0e6; /* Celeste claro */
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .answers button:hover {
+            background-color: #87ceeb; /* Un poco más oscuro al pasar el mouse */
+        }
+        .score {
+            font-size: 30px; /* Mayor tamaño */
+            color: red; /* Color rojo */
+            font-weight: bold; /* Negrita */
+            margin-top: 20px;
+        }
+        .correct {
+            background-color: green;
+            color: white;
+        }
+        .incorrect {
+            background-color: red;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div id="quiz-container">
+    <div class="image-container">
+        <img id="question-image" src="" alt="Imagen de la pregunta">
+    </div>
+    <div class="question" id="question-text"></div>
+    <div class="answers">
+        <button class="answer-btn" onclick="checkAnswer(0)">Respuesta 1</button>
+        <button class="answer-btn" onclick="checkAnswer(1)">Respuesta 2</button>
+        <button class="answer-btn" onclick="checkAnswer(2)">Respuesta 3</button>
+        <button class="answer-btn" onclick="checkAnswer(3)">Respuesta 4</button>
+    </div>
+    <div class="score" id="score">Puntos: 0</div>
+</div>
+
+<script src="PregResp.js"></script>
+
+</body>
+</html>

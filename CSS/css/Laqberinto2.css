@@ -1,0 +1,22 @@
+#laberinto {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    background-color: #f0f0f0;
+    border: 2px solid #000;
+    overflow: hidden;
+}
+
+.pared {
+    position: absolute;
+    background-color: #000;
+}
+
+#personaje {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+    cursor: pointer;
+}

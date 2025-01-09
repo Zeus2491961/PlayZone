@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crucigrama</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Ajusta el alto mínimo del cuerpo */
+            background-color: #f4f4f4;
+            flex-direction: column; /* Alinea el título y el contenido verticalmente */
+        }
+
+        #titulo {
+            text-align: center; /* Centra el texto del título */
+            font-family: Impact, sans-serif;
+            color: #990606; /* Cambia el color del texto del título según tu preferencia */
+            font-size: 50px; /* Cambia el tamaño de la fuente del título según tu preferencia */
+            margin-bottom: 20px; /* Añade un margen inferior al título para separarlo del contenido */
+        }
+
+        #contenedor {
+            display: flex;
+            align-items: flex-start; /* Alinea los elementos al principio */
+            gap: 20px; /* Espacio entre el crucigrama y las preguntas */
+            overflow-x: auto; /* Permite el desplazamiento horizontal si es necesario */
+            max-height: calc(100vh - 100px); /* Establece un alto máximo para el contenedor */
+        }
+        
+        #preguntas {
+            width: 500px; /* Ancho de la lista de preguntas */
+            order: 1; /* Cambia el orden para colocar a la derecha */
+            margin-right: 20px; /* Espacio a la derecha de la lista de preguntas */
+        }
+
+        #crucigrama {
+            border-collapse: collapse;
+            border: 1px solid black;
+            position: sticky; /* Fija la posición del crucigrama */
+            top: 0; /* La posición fija será desde la parte superior */
+            background-color: white; /* Cambia el color de fondo si es necesario */
+        }
+
+        #crucigrama td {
+            width: 30px;
+            height: 30px;
+            border: 1px solid black;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            position: relative;
+        }
+
+        #crucigrama input {
+            border: none;
+            background-color: transparent;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: black;
+        }
+
+        #crucigrama .blue {
+            background-color: #E0F2F7; /* Azul claro en formato hexadecimal */
+        }
+
+        #crucigrama .number {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            font-size: 10px;
+            color: #666;
+        }
+
+        #crucigrama .gray {
+            background-color: #837979;
+        }
+
+        #crucigrama .blank {
+            /* Agrega estilos adicionales si es necesario para las casillas blancas sin número */
+        }
+
+        #preguntas {
+            font-family: Arial, sans-serif;
+            display: flex;
+            font-size: 14px; /* Cambia el tamaño del texto de las preguntas según tu preferencia */
+            line-height: 1.5; /* Ajusta el interlineado de las preguntas */
+        }
+        
+
+        #preguntas > div {
+            flex: 1;
+            margin-bottom: 15px; /* Espacio entre cada pregunta */
+        }
+
+        .mensaje-final {
+            display: none; /* Oculta el mensaje final inicialmente */
+            font-size: 24px;
+            font-weight: bold;
+            color: green;
+            margin-top: 20px;
+        }
+        
+    </style>
+    
+</head>
+
+<body>
+    <h1 id="titulo"></h1>
+    <div id="contenedor">
+        <table id="crucigrama"></table>
+        
+        <div id="preguntas">
+            <div>
+                <h2>Horizontales</h2>
+                <div>H1: Pref. pluralidad</div>
+                <div>H5: Dueño, señor</div>
+                <div>H8: Lado izq. del barco</div>
+                <div>H12: Que encierra un enigma</div>
+                <div>H15: Ganso domestico</div>
+                <div>H16: "Canto General" (lit.)</div>
+                <div>H17: Temblar</div>
+                <div>H19: Ayuda al alcohólico</div>
+                <div>H20: "La peste" (lit.)</div>
+                <div>H22: Acción de retirarse</div>
+                <div>H23: El mejor</div>
+                <div>H25: Actriz "Cabaret"</div>
+                <div>H27: Rey de Shakespeare</div>
+                <div>H28: 6 (rom.)</div>
+                <div>H29: Anotación en fútbol</div>
+                <div>H31: Amarro</div>
+                <div>H32: natural de Roma</div>
+                <div>H35: Producir olas</div>
+                <div>H37: Televisión (abr.)</div>
+                <div>H39: Hijo de Sem</div>
+                <div>H40: "Mesas separadas" (lit.)</div>
+                <div>H41: Ardilla, castor o ratón</div>
+                <div>H44: Asno salvaje</div>
+                <div>H47: Etapa del sueño</div>
+                <div>H48: Prenda de vestir femenina</div>
+                <div>H50.: Sombrero de ala grande</div>
+                <div>H51: Inventó la dinamita</div>
+                <div>H52: Pequeño (ing.)</div>
+                <div>H54: "Para Elisa" (mus.)</div>
+                <div>H56: Ribete, cenefa, greca</div>
+                <div>H57: Arte (lat.)</div>
+                <div>H58: Perezoso de tres dedos</div>
+                <div>H59: "Carmen" (mus.)</div>
+                <div>H60: Papagayo pequeño</div>
+                <div>H64: Anillo</div>
+                <div>H65: Gameto femenino</div>
+                <div>H66: Dios romano de los mares</div>
+                <!-- Añade más preguntas si es necesario -->
+            </div>
+            <div>
+                <h2>Verticales</h2>
+                <div>V1: Polígono de cinco lados</div>
+                <div>V2: Uno (ing.)</div>
+                <div>V3: Instrumento de Orfeo</div>
+                <div>V4: Idéntico, exacto</div>
+                <div>V5: Poker de ases</div>
+                <div>V6: "El principe y el mendigo" (lit.)</div>
+                <div>V7: ONU para el trabajo</div>
+                <div>V8: Pintor y escultor colombiano</div>
+                <div>V9: Llamado "El libertador"</div>
+                <div>V10: Instrumento musical de viento</div>
+                <div>V11: Poco común</div>
+                <div>V13: 1500 (rom.)</div>
+                <div>V14: # Atom.: 6, 77 y 18.</div>
+                <div>V18: Ello (ing.)</div>
+                <div>V21: Hilaba las hebras de la vida</div>
+                <div>V24: Moneda del Perú</div>
+                <div>V25: ...Mediterráneo, ...Cantábrico.</div>
+                <div>V30: Mortíferos</div>
+                <div>V33: "El viejo y el ..." (lit.)</div>
+                <div>V34: Escápula</div>
+                <div>V36: Jerga, jerigonza</div>
+                <div>V38: "Miguel Strogoff" (lit.)</div>
+                <div>V41: Voz de arrullo</div>
+                <div>V42: Perteneciente a </div>
+                <div>V43: ONU para la salud</div>
+                <div>V45: # Atom: 11 y 68</div>
+                <div>V46: # Atom: 86 y 1</div>
+                <div>V48: El rey de los monos</div>
+                <div>V49: Fabricante de ollas</div>
+                <div>V51: Aeronave provista de alas</div>
+                <div>V53: Yo (fr.)</div>
+                <div>V54: Dios del vino</div>
+                <div>V55: Avena (ing.)</div>
+                <div>V59: Murciélago (ing.)</div>
+                <div>V60: 150 (rom.)</div>
+                <div>V61: Enroque corto</div>
+                <div>V62: Segunda nota musical</div>
+                <div>V63: "Tradiciones peruanas" (lit.)</div>
+                <!-- Añade más preguntas si es necesario -->
+            </div>
+        </div>
+    <div class="contenedor-botones">
+        <button id="verificar">Verificar Crucigrama</button>
+        <div class="mensaje-final">Lo lograste</div>
+    </div>
+</div>
+
+<style>
+    .contenedor-botones {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+</style>
+    
+    <script>
+    const respuestas = [
+        ['P', 'O', 'L', 'I','_', 'A', 'M', 'O','_', 'B', 'A', 'B', 'O', 'R'],
+        ['E', 'N', 'I', 'G', 'M', 'A', 'T', 'I', 'C', 'O','_', 'O', 'C', 'A'],
+        ['N', 'E', 'R', 'U', 'D', 'A','_', 'T', 'I', 'T', 'I', 'L', 'A', 'R'],
+        ['T','_', 'A', 'A','_', 'A', 'C','_', 'R', 'E', 'T', 'I', 'R', 'O'],
+        ['A', 'S','_', 'L', 'M','_', 'L', 'E', 'A', 'R','_', 'V', 'I','_'],
+        ['G', 'O', 'L','_', 'A', 'T', 'O','_', 'R', 'O', 'M', 'A', 'N', 'O'],
+        ['O', 'L', 'E', 'A', 'R','_', 'T', 'V','_','_', 'A', 'R', 'A', 'M'],
+        ['N','_', 'T', 'R','_', 'R', 'O', 'E', 'D', 'O', 'R','_','_', 'O'],
+        ['O', 'N', 'A', 'G', 'R', 'O','_', 'R', 'E', 'M','_', 'T', 'O', 'P'],
+        ['_', 'A', 'L', 'O', 'N','_', 'A', 'N','_', 'S', 'M', 'A', 'L', 'L'],
+        ['B', 'E', 'E', 'T', 'H', 'O', 'V', 'E', 'N','_', 'O', 'R', 'L', 'A'],
+        ['A', 'R', 'S','_','_', 'A', 'I','_','_', 'B', 'I', 'Z', 'E', 'T'],
+        ['C','_','_', 'C', 'O', 'T', 'O', 'R', 'R', 'A','_', 'A', 'R', 'O'],
+        ['O', 'V', 'U', 'L', 'O','_', 'N', 'E', 'P', 'T', 'U', 'N', 'O','_']
+    ];
+
+    window.onload = function() {
+        const crucigrama = document.getElementById('crucigrama');
+        const celdas = [];
+
+        for (let i = 0; i < 14; i++) {
+            const fila = document.createElement('tr');
+            for (let j = 0; j < 14; j++) {
+                const celda = document.createElement('td');
+                if (esCasillaPalabra(i, j)) {
+                    celda.classList.add('gray');
+                } else {
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.maxLength = 1;
+                    celda.appendChild(input);
+                    if (esCasillaBlancaSinNumero(i, j)) {
+                        celda.classList.add('blank');
+                    } else {
+                        const numero = document.createElement('span');
+                        numero.className = 'number';
+                        numero.textContent = obtenerNumero(i, j);
+                        celda.appendChild(numero);
+                    }
+                }
+                fila.appendChild(celda);
+            }
+            crucigrama.appendChild(fila);
+            celdas.push(Array.from(fila.children));
+        }
+
+        celdas.forEach(fila => {
+            fila.forEach(celda => {
+                const inputElement = celda.querySelector('input');
+                if (inputElement) {
+                    inputElement.addEventListener('input', function() {
+                        this.value = this.value.toUpperCase();
+                    });
+                }
+            });
+        });
+
+        let seleccionHorizontal = false;
+        let ultimaCeldaSeleccionada = null;
+
+        celdas.forEach(fila => {
+            fila.forEach(celda => {
+                celda.addEventListener('click', function() {
+                    if (!seleccionHorizontal) {
+                        resetearFondos();
+                        celda.classList.add('blue');
+                        let siguienteCelda = celda.nextElementSibling;
+                        while (siguienteCelda && !siguienteCelda.classList.contains('gray')) {
+                            siguienteCelda.classList.add('blue');
+                            siguienteCelda = siguienteCelda.nextElementSibling;
+                        }
+                        let anteriorCelda = celda.previousElementSibling;
+                        while (anteriorCelda && !anteriorCelda.classList.contains('gray')) {
+                            anteriorCelda.classList.add('blue');
+                            anteriorCelda = anteriorCelda.previousElementSibling;
+                        }
+                        seleccionHorizontal = true;
+                        ultimaCeldaSeleccionada = celda;
+                        celda.querySelector('input')?.focus();
+                    } else {
+                        resetearFondos();
+                        let columna = celda.cellIndex;
+                        let filaIndex = celda.parentElement.rowIndex;
+                        let filaActual = celda.parentElement;
+                        while (filaActual && !filaActual.children[columna].classList.contains('gray')) {
+                            filaActual.children[columna].classList.add('blue');
+                            filaActual = filaActual.nextElementSibling;
+                        }
+                        filaActual = celda.parentElement.previousElementSibling;
+                        while (filaActual && !filaActual.children[columna].classList.contains('gray')) {
+                            filaActual.children[columna].classList.add('blue');
+                            filaActual = filaActual.previousElementSibling;
+                        }
+                        celda.classList.add('blue');
+                        seleccionHorizontal = false;
+                        ultimaCeldaSeleccionada = celda;
+                        celda.querySelector('input')?.focus();
+                    }
+                });
+            });
+        });
+
+        function resetearFondos() {
+            celdas.flat().forEach(celda => celda.classList.remove('blue'));
+        }
+
+        function esCasillaPalabra(fila, columna) {
+            const casillasPalabra = [
+                    [0, 4], [0, 8],
+                    [1, 10],
+                    [2, 6],
+                    [3, 1], [3, 4], [3, 7],
+                    [4, 2], [4, 5], [4, 10], [4, 13],
+                    [5, 3], [5, 7],
+                    [6, 5], [6, 8], [6, 9],
+                    [7, 1], [7, 4], [7, 11], [7, 12],
+                    [8, 6], [8, 10],
+                    [9, 0], [9, 5], [9, 8],
+                    [10, 9],
+                    [11, 3], [11, 4], [11, 7], [11, 8],
+                    [12, 1], [12, 2], [12, 10],
+                    [13, 5], [13, 13]
+                ];
+                
+            return casillasPalabra.some(pos => pos[0] === fila && pos[1] === columna);
+        }
+
+        function esCasillaBlancaSinNumero(fila, columna) {
+            const casillasBlancasSinNumero = [
+                 [0, 10],
+                 [1, 1], [1, 2],[1, 3], [1, 5], [1, 6], [1, 7], [1, 9], [1, 12], [1, 13],
+                 [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 8], [2, 9], [2, 11], [2, 12],
+                 [2, 13],
+                 [3, 0], [3, 3], [3, 9], [3, 10], [3, 11], [3, 12], [3, 13],
+                 [4, 7], [4, 8], [4, 9], [4, 12],
+                 [5, 1], [5, 5], [5, 6], [5, 9], [5, 11], [5, 12],
+                 [6, 1], [6, 2], [6, 4], [6, 11], [6, 12], [6, 13],
+                 [7, 0], [7, 3], [7, 6], [7, 7], [7, 10], [7, 13],
+                 [8, 2], [8, 3], [8, 5], [8, 8], [8, 9], [8, 13],
+                 [9, 2], [9, 3], [9, 4], [9, 7], [9, 11], [9, 12], [9, 13],
+                 [10, 1], [10, 2], [10, 3], [10, 4], [10, 6], [10, 7], [10, 8], [10, 11],
+                 [10, 12], [10, 13],
+                 [11, 1], [11, 2], [11, 6], [11, 10], [11, 11], [11, 12], [11, 13],
+                 [12, 0], [12, 5], [12, 6], [12, 9], [12, 12], [12, 13],
+                 [13, 1], [13, 2], [13, 3], [13, 4], [13, 7], [13, 8], [13, 9], [13, 10],
+                 [13, 11], [13, 12],
+                
+                // Otros casos
+            ];
+            return casillasBlancasSinNumero.some(pos => pos[0] === fila && pos[1] === columna);
+        }
+
+        function obtenerNumero(fila, columna) {
+            let contador = 0;
+            for (let i = 0; i < fila; i++) {
+                for (let j = 0; j < 14; j++) {
+                    if (!esCasillaPalabra(i, j) && !esCasillaBlancaSinNumero(i, j)) {
+                        contador++;
+                    }
+                }
+            }
+            for (let j = 0; j <= columna; j++) {
+                if (!esCasillaPalabra(fila, j) && !esCasillaBlancaSinNumero(fila, j)) {
+                    contador++;
+                }
+            }
+            return contador;
+        }
+
+        function verificarCrucigrama() {
+            let correcto = true;
+            celdas.forEach((fila, filaIndex) => {
+                fila.forEach((celda, columnaIndex) => {
+                    const inputElement = celda.querySelector('input');
+                    if (inputElement && !esCasillaBlancaSinNumero(filaIndex, columnaIndex)) {
+                        const respuesta = respuestas[filaIndex][columnaIndex];
+                        if (inputElement.value.toUpperCase() !== respuesta) {
+                            correcto = false;
+                        }
+                    }
+                });
+            });
+
+            if (correcto) {
+                document.querySelector('.mensaje-final').textContent = '¡Lo lograste!';
+                document.querySelector('.mensaje-final').style.color = 'green';
+            } else {
+                document.querySelector('.mensaje-final').textContent = 'Hay errores.';
+                document.querySelector('.mensaje-final').style.color = 'red';
+            }
+            document.querySelector('.mensaje-final').style.display = 'block';
+        }
+
+        document.getElementById('verificar').addEventListener('click', verificarCrucigrama);
+    };
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play Zone</title>
+    <style>
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Puedes cambiar este valor a 'flex-start' o 'flex-end' */
+    height: 100vh;
+    margin: 0;
+    background-color: #e0e0e0;
+}
+
+        #laberinto {
+            position: relative;
+            width: 385px;
+            height: 385px;
+            background-color: #f0f0f0;
+            border: 2px solid #000;
+            overflow: hidden;
+        }
+        .pared {
+    position: absolute;
+    background-color: #bf029d;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+    border: 1px solid #8b0170;
+    background: linear-gradient(145deg, #bf029d, #7a0153);
+}
+
+        #personaje {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: radial-gradient(circle at 30% 30%, #ff0000, #8b0000);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+        #salida {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: green;
+            border-radius: 50%;
+            right: 0;
+            bottom: 0;
+        }
+        #mensaje {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+<div id="laberinto">
+    <div id="personaje" style="top: 0px; left: 0px;"></div>
+    <div id="salida"></div>
+    
+    <!-- Paredes del laberinto -->
+    <div class="pared" style="top: 65px; left: 30px; width: 5px; height: 85px;"></div><!-- v1 -->
+    <div class="pared" style="top: 230px; left: 30px; width: 5px; height: 125px;"></div><!-- v1.1 -->
+    <div class="pared" style="top: 30px; left: 35px; width: 35px; height: 5px;"></div><!-- h1 -->
+    <div class="pared" style="top: 30px; left: 150px; width: 85px; height: 5px;"></div><!-- h1.1 -->
+    <div class="pared" style="top: 0px; left: 70px; width: 5px; height: 70px;"></div><!-- v2 -->
+    <div class="pared" style="top: 190px; left: 70px; width: 5px; height: 40px;"></div><!-- v2.1 -->
+    <div class="pared" style="top: 315px; left: 70px; width: 5px; height: 40px;"></div><!-- v2.2 -->
+    <div class="pared" style="top: 70px; left: 110px; width: 160px; height: 5px;"></div><!-- h2 -->
+    <div class="pared" style="top: 70px; left: 350px; width: 35px; height: 5px;"></div><!-- h2.1 -->
+    <div class="pared" style="top: 20px; left: 110px; width: 5px; height: 50px;"></div><!-- v3 -->
+    <div class="pared" style="top: 110px; left: 110px; width: 5px; height: 80px;"></div><!-- v3.1 -->
+    <div class="pared" style="top: 230px; left: 110px; width: 5px; height: 70px;"></div><!-- v3.2 -->
+    <div class="pared" style="top: 110px; left: 30px; width: 80px; height: 5px;"></div><!-- h3 -->
+    <div class="pared" style="top: 110px; left: 150px; width: 120px; height: 5px;"></div><!-- h3.1 -->
+    <div class="pared" style="top: 0px; left: 150px; width: 5px; height: 30px;"></div><!-- v4 -->
+    <div class="pared" style="top: 200px; left: 150px; width: 5px; height: 30px;"></div><!-- v4.1 -->
+    <div class="pared" style="top: 270px; left: 150px; width: 5px; height: 30px;"></div><!-- v4.2 -->
+    <div class="pared" style="top: 150px; left: 30px; width: 50px; height: 5px;"></div><!-- h4 -->
+    <div class="pared" style="top: 150px; left: 110px; width: 30px; height: 5px;"></div><!-- h4.1 -->
+    <div class="pared" style="top: 150px; left: 230px; width: 120px; height: 5px;"></div><!-- h4.2 -->
+    <div class="pared" style="top: 110px; left: 190px; width: 5px; height: 80px;"></div><!-- v5 -->
+    <div class="pared" style="top: 310px; left: 190px; width: 5px; height: 40px;"></div><!-- v5.1 -->
+    <div class="pared" style="top: 190px; left: 0px; width: 115px; height: 5px;"></div><!-- h5 -->
+    <div class="pared" style="top: 190px; left: 190px; width: 120px; height: 5px;"></div><!-- h5.1 -->
+    <div class="pared" style="top: 230px; left: 230px; width: 5px; height: 80px;"></div><!-- v6 -->
+    <div class="pared" style="top: 350px; left: 230px; width: 5px; height: 35px;"></div><!-- v6.1 -->
+    <div class="pared" style="top: 230px; left: 110px; width: 80px; height: 5px;"></div><!-- h6 -->
+    <div class="pared" style="top: 230px; left: 230px; width: 120px; height: 5px;"></div><!-- h6.1 -->
+    <div class="pared" style="top: 30px; left: 270px; width: 5px; height: 85px;"></div><!-- v7 -->
+    <div class="pared" style="top: 310px; left: 270px; width: 5px; height: 45px;"></div><!-- v7.1 -->
+    <div class="pared" style="top: 270px; left: 30px; width: 80px; height: 5px;"></div><!-- h7 -->
+    <div class="pared" style="top: 270px; left: 150px; width: 80px; height: 5px;"></div><!-- h7.1 -->
+    <div class="pared" style="top: 270px; left: 270px; width: 115px; height: 5px;"></div><!-- h7.2 -->
+    <div class="pared" style="top: 0px; left: 310px; width: 5px; height: 150px;"></div><!-- v8 -->
+    <div class="pared" style="top: 190px; left: 310px; width: 5px; height: 40px;"></div><!-- v8.1 -->
+    <div class="pared" style="top: 270px; left: 310px; width: 5px; height: 40px;"></div><!-- v8.2 -->
+    <div class="pared" style="top: 310px; left: 190px; width: 85px; height: 5px;"></div><!-- h8 -->
+    <div class="pared" style="top: 30px; left: 350px; width: 5px; height: 40px;"></div><!-- v9 -->
+    <div class="pared" style="top: 115px; left: 350px; width: 5px; height: 80px;"></div><!-- v9.1 -->
+    <div class="pared" style="top: 305px; left: 350px; width: 5px; height: 90px;"></div><!-- v9.2 -->
+    <div class="pared" style="top: 350px; left: 30px; width: 165px; height: 5px;"></div><!-- h9 -->
+    <div class="pared" style="top: 350px; left: 270px; width: 80px; height: 5px;"></div><!-- h9 -->
+
+
+
+    <!-- Más paredes aquí -->
+</div>
+
+<div id="mensaje">¡Ganaste!</div>
+
+<script>
+    const personaje = document.getElementById('personaje');
+    const laberinto = document.getElementById('laberinto');
+    const salida = document.getElementById('salida');
+    const mensaje = document.getElementById('mensaje');
+    const paredes = document.querySelectorAll('.pared');
+    let moveStep = 2;
+    let movingInterval;
+
+    // Función para detectar colisión
+    function detectarColision(x, y) {
+        for (let pared of paredes) {
+            let paredRect = pared.getBoundingClientRect();
+            let personajeRect = {
+                left: x + laberinto.offsetLeft,
+                top: y + laberinto.offsetTop,
+                right: x + laberinto.offsetLeft + personaje.offsetWidth,
+                bottom: y + laberinto.offsetTop + personaje.offsetHeight
+            };
+
+            if (!(personajeRect.right < paredRect.left || 
+                  personajeRect.left > paredRect.right || 
+                  personajeRect.bottom < paredRect.top || 
+                  personajeRect.top > paredRect.bottom)) {
+                return true; // Hay colisión
+            }
+        }
+        return false; // No hay colisión
+    }
+
+    // Función para verificar si se alcanzó la salida
+    function verificarSalida() {
+        let personajeRect = personaje.getBoundingClientRect();
+        let salidaRect = salida.getBoundingClientRect();
+
+        if (!(personajeRect.right < salidaRect.left || 
+              personajeRect.left > salidaRect.right || 
+              personajeRect.bottom < salidaRect.top || 
+              personajeRect.top > salidaRect.bottom)) {
+            mensaje.style.display = 'block'; // Mostrar mensaje de ganaste
+        }
+    }
+
+    // Movimiento con el mouse
+    personaje.addEventListener('mousedown', function(event) {
+        event.preventDefault();
+        
+        const moverPersonaje = (event) => {
+            let x = event.clientX - laberinto.offsetLeft - personaje.offsetWidth / 2;
+            let y = event.clientY - laberinto.offsetTop - personaje.offsetHeight / 2;
+
+            // Limitar los movimientos dentro del laberinto y verificar colisiones
+            x = Math.max(0, Math.min(x, laberinto.clientWidth - personaje.offsetWidth));
+            y = Math.max(0, Math.min(y, laberinto.clientHeight - personaje.offsetHeight));
+
+            if (!detectarColision(x, y)) {
+                personaje.style.left = x + 'px';
+                personaje.style.top = y + 'px';
+            }
+
+            verificarSalida();
+        };
+
+        document.addEventListener('mousemove', moverPersonaje);
+
+        document.addEventListener('mouseup', function() {
+            document.removeEventListener('mousemove', moverPersonaje);
+        }, { once: true });
+    });
+
+    // Movimiento continuo con las flechas del teclado
+    document.addEventListener('keydown', function(event) {
+        if (movingInterval) return; // Evita múltiples intervalos
+
+        movingInterval = setInterval(() => {
+            let x = personaje.offsetLeft;
+            let y = personaje.offsetTop;
+
+            switch(event.key) {
+                case 'ArrowUp':
+                    y -= moveStep;
+                    break;
+                case 'ArrowDown':
+                    y += moveStep;
+                    break;
+                case 'ArrowLeft':
+                    x -= moveStep;
+                    break;
+                case 'ArrowRight':
+                    x += moveStep;
+                    break;
+            }
+
+            // Limitar los movimientos dentro del laberinto y verificar colisiones
+            x = Math.max(0, Math.min(x, laberinto.clientWidth - personaje.offsetWidth));
+            y = Math.max(0, Math.min(y, laberinto.clientHeight - personaje.offsetHeight));
+
+            if (!detectarColision(x, y)) {
+                personaje.style.left = x + 'px';
+                personaje.style.top = y + 'px';
+            }
+
+            verificarSalida();
+        }, 10); // Intervalo para movimiento continuo
+    });
+
+    document.addEventListener('keyup', function() {
+        clearInterval(movingInterval);
+        movingInterval = null;
+    });
+</script>
+
+</body>
+</html>
