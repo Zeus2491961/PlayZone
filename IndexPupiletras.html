@@ -1,99 +1,202 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Play Zone</title>
+    <title>Pupiletras - Play Zone</title>
     <link rel="shortcut icon" href="Imagenes/Logo Play Zone.ico" type="image/x-icon">
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <!-- Estilos -->
-    <link rel="stylesheet" href="CSS/estilos.css">
-
+    <link rel="stylesheet" href="CSS/css/estilos.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        .imagen-enlace img {
-            width: 100%;
-            height: auto;
+        .portafolio {
+            background: #f2f2f2;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(9, 40px);
+            grid-template-rows: repeat(9, 40px);
+            gap: 1px;
+            border: 2px solid black;
+            background: black;
+        }
+        .cell {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .selected {
+            background: lightblue;
+        }
+        .word-list {
+            list-style: none;
+            padding: 0;
+        }
+        .word-list li {
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .word-list li.found {
+            color: red;
+            text-decoration: line-through;
+        }
+        #message {
+            margin-top: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            color: green;
         }
     </style>
 </head>
 <body>
     <header>
         <nav>
-            <a href="index.html">Inicio</a><br><br>
-            <a href="Pupiletras.html">Pupiletras</a><br><br>
-            <a href="Laberinto.html">Laberinto</a><br><br>
-            <a href="Crucigrama.html">Crucigrama</a><br><br>
-            <a href="IndexArcano.html">Arcano</a><br><br>
+            <a href="index.html">Inicio</a>
+            <br><br>
+            <a href="Pupiletras.html">Pupiletras</a>
+            <br><br>
+            <a href="Laberinto.html">Laberinto</a>
+            <br><br>
+            <a href="Crucigrama.html">Crucigrama</a>
+            <br><br>
+            <a href="IndexArcano.html">Arcano</a>
+            <br><br>
             <a href="IndexSudoku.html">Sudoku</a>
         </nav>
         <section class="img-header">
-            <img src="Imagenes/Logo_Play_Zone3.png" alt="Logo Play Zone">
+            <img src="CSS/Imagenes/Logo_Play_Zone3.png" alt="Logo Play Zone">
         </section>
     </header>
 
     <section class="portafolio">
         <div class="contenedor">
-            <h2 class="titulo">Pupiletras</h2>
-
-            <div class="main-container">
-                <div class="container">
-                    <div class="grid">
-                        <table>
-                            <tbody>
-                                <!-- Aquí se generarán los casilleros dinámicamente con JavaScript -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="word-list">
-                    <h2>Piedras preciosas</h2>
-                    <ul>
-                        <li class="word-item">Diamante</li>
-                        <li class="word-item">Rubí</li>
-                        <li class="word-item">Zafiro</li>
-                        <li class="word-item">Esmeralda</li>
-                        <li class="word-item">Amatista</li>
-                        <li class="word-item">Ágata</li>
-                        <li class="word-item">Ópalo</li>
-                        <li class="word-item">Turquesa</li>
-                        <li class="word-item">Citrino</li>
-                        <li class="word-item">Jade</li>
-                        <li class="word-item">Granate</li>
-                        <li class="word-item">Ónix</li>
+            <h1 class="titulo">Pupiletras</h1>
+            <div class="container">
+                <div class="grid" id="grid"></div>
+                <div>
+                    <h3>Piedras preciosas:</h3>
+                    <ul class="word-list" id="wordList">
+                        <li>Diamante</li>
+                        <li>Rubí</li>
+                        <li>Zafiro</li>
+                        <li>Esmeralda</li>
+                        <li>Amatista</li>
+                        <li>Ágata</li>
+                        <li>Ópalo</li>
+                        <li>Turquesa</li>
+                        <li>Citrino</li>
+                        <li>Jade</li>
+                        <li>Granate</li>
+                        <li>Ónix</li>
                     </ul>
                 </div>
             </div>
-
-            <p id="message"></p>
+            <div id="message"></div>
         </div>
     </section>
 
-    <article id="especial"></article>
+    <script>
+        const gridData = [
+            ['A', 'A', 'T', 'S', 'I', 'T', 'A', 'M', 'A'],
+            ['S', 'D', 'I', 'A', 'M', 'A', 'N', 'T', 'E'],
+            ['E', 'O', 'L', 'A', 'P', 'O', 'X', 'A', 'G'],
+            ['U', 'R', 'E', 'A', 'O', 'T', 'E', 'L', 'R'],
+            ['Q', 'C', 'I', 'T', 'R', 'I', 'N', 'O', 'A'],
+            ['R', 'O', 'A', 'U', 'I', 'E', 'O', 'N', 'N'],
+            ['U', 'N', 'B', 'N', 'F', 'A', 'M', 'E', 'A'],
+            ['T', 'I', 'A', 'G', 'A', 'T', 'A', 'S', 'T'],
+            ['A', 'X', 'I', 'S', 'Z', 'J', 'A', 'D', 'E'],
+        ];
 
-    <footer>
-        <div class="contenedor-footer">
-            <div class="content-foo">
-                <h4>Teléfono</h4>
-                <p>969469253</p>
-            </div>
-            <div class="content-foo">
-                <h4>Email</h4>
-                <p>eduardoribeyro@yahoo.es</p>
-            </div>
-            <div class="content-foo">
-                <h4>Ubicación</h4>
-                <p>Lima, Perú</p>
-            </div>
+        const correctSelections = new Set([
+            '0-0', '0-1', '0-2', '0-3', '0-4', '0-5', '0-6', '0-7', '0-8',
+            '1-0', '1-1', '1-2', '1-3', '1-4', '1-5', '1-6', '1-7', '1-8',
+            '2-0', '2-1', '2-2', '2-3', '2-4', '2-5', '2-8', '3-0', '3-3', '3-4', '3-8',
+            '4-0', '4-1', '4-2', '4-3', '4-4', '4-5', '4-6', '4-7', '4-8',
+            '5-0', '5-1', '5-3', '5-4', '5-5', '5-8', '6-0', '6-1', '6-2', '6-4', '6-6', '6-8',
+            '7-0', '7-1', '7-2', '7-3', '7-4', '7-5', '7-6', '7-7', '7-8', '8-1', '8-4', '8-5', '8-6', '8-7', '8-8'
+        ]);
+
+        const selectedCells = new Set();
+        const grid = document.getElementById('grid');
+
+        gridData.forEach((row, rowIndex) => {
+            row.forEach((letter, colIndex) => {
+                const cell = document.createElement('button');
+                cell.classList.add('cell');
+                cell.textContent = letter;
+                cell.dataset.position = `${rowIndex}-${colIndex}`;
+                cell.addEventListener('click', () => {
+                    const pos = cell.dataset.position;
+                    if (selectedCells.has(pos)) {
+                        selectedCells.delete(pos);
+                        cell.classList.remove('selected');
+                    } else {
+                        selectedCells.add(pos);
+                        cell.classList.add('selected');
+                    }
+                    checkWin();
+                });
+                grid.appendChild(cell);
+            });
+        });
+
+        function checkWin() {
+            document.getElementById('message').textContent =
+                [...correctSelections].every(pos => selectedCells.has(pos)) && selectedCells.size === correctSelections.size
+                    ? '¡Lo lograste!'
+                    : '';
+        }
+    </script>
+   <script>
+    // Agregar funcionalidad a la lista de palabras
+    document.querySelectorAll('.word-list li').forEach(item => {
+        item.addEventListener('click', () => {
+            item.classList.toggle('found'); // Alterna la clase 'found' para tachar y poner en rojo
+        });
+    });
+</script>
+</script>
+    
+<footer>
+    <div class="contenedor-footer">
+        <div class="content-foo">
+            <h4>Phone</h4>
+            <p>969469253</p>
         </div>
-        <h2 class="titulo-final">&copy; Play Zone</h2>
-    </footer>
+        <div class="content-foo">
+            <h4>Email</h4>
+            <p>eduardoribeyro@yahoo.es</p>
+        </div>
+        <div class="content-foo">
+            <h4>Location</h4>
+            <p>Lima-Perú</p>
+        </div>
+    </div>
+    <h2 class="titulo-final">&copy; Play Zone</h2>
+</footer>
 
-    <!-- Script de Pupiletras -->
-    <script src="JS/script.js"></script>
+</body>
+</html>
+
 </body>
 </html>
