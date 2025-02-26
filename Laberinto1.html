@@ -1,65 +1,50 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Outfit&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Página Play Zone</title>
-        <link rel="shortcut icon" href="Imagenes/Logo Play Zone.ico" type="image/x-icon">
-        <link rel="stylesheet" href="css/estiloscrucigrama.css">
-        <style>
-            .imagen-enlace img {
-                width: 100%;
-                height: auto;
-            }
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Play Zone</title>
+    <link rel="shortcut icon" href="Imagenes/Logo Play Zone.ico" type="image/x-icon">
+    <link rel="stylesheet" href="CSS/css/estilos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <style>
+        .imagen-enlace img {
+            width: 100%;
+            height: auto;
+        }
+        iframe {
+    width: 80%;
+    height: 600px;
+    display: block;
+    margin: 20px auto;
+    border: none;
+}
 
-            /* Estilos para el iframe */
-            iframe {
-                width: 100%;
-                height: 500px;
-                background-color: transparent; /* Fondo transparente */
-                border: none; /* Sin borde */
-            }
-        </style>
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                const iframe = document.querySelector("iframe");
-
-                // Cuando el cursor entra en el iframe
-                iframe.addEventListener("mouseenter", function() {
-                    document.body.style.overflow = 'hidden';  // Deshabilitar scroll
-                });
-
-                // Cuando el cursor sale del iframe
-                iframe.addEventListener("mouseleave", function() {
-                    document.body.style.overflow = 'auto';  // Habilitar scroll
-                });
-            });
-        </script>
-    </head>
-    <body>
-        <header>
-            <nav>
-                <a href="file:///Users/eduardo/Desktop/Proyectos/Workspace/CSS/index.html">Inicio</a>
-                <br><br>
-                <a href="file:///Users/eduardo/Desktop/Proyectos/Workspace/CSS/Pupiletras.html">Pupiletras</a>
-                <br><br>
-                <a href="file:///Users/eduardo/Desktop/Proyectos/Workspace/CSS/Laberinto.html">Laberinto</a>
-                <br><br>
-                <a href="file:///Users/eduardo/Desktop/Proyectos/Workspace/CSS/Crucigrama.html">Crucigrama</a>
-                <br><br>
-                <a href="file:///Users/eduardo/Desktop/Proyectos/Workspace/CSS/IndexArcano.html">Arcano</a>
-                <br><br>
-                <a href="file:///Users/eduardo/Desktop/Proyectos/Workspace/CSS/IndexSudoku.html">Sudoku</a>
-            </nav>
-            <section class="img-header">
-                <img src="Logo Play Zone.3.png" alt="Logo Play Zone">
-            </section>
-        </header>
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <br><br>
+            <a href="Pupiletras.html">Pupiletras</a>
+            <br><br>
+            <a href="Laberinto.html">Laberinto</a>
+            <br><br>
+            <a href="Crucigrama.html">Crucigrama</a>
+            <br><br>
+            <a href="IndexArcano.html">Arcano</a>
+            <br><br>
+            <a href="IndexSudoku.html">Sudoku</a>
+        </nav>
+        <section class="img-header">
+            <img src="CSS/Imagenes/Logo_Play_Zone3.png" alt="Logo Play Zone">
+        </section>
+    </header>
 
         <section class="portafolio">
             <div class="contenedor">
