@@ -12,82 +12,66 @@
     <link rel="stylesheet" href="CSS/css/estilos.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
     <style>
-            .imagen-enlace img {
-                width: 100%;
-                height: auto;
-            }
+        .imagen-enlace img {
+            width: 100%;
+            height: auto;
+        }
 
-            /* Estilos para el iframe */
-            iframe {
-                width: 100%;
-                height: 800px;
-                background-color: transparent; /* Fondo transparente */
-                border: none; /* Sin borde */
-            }
-        </style>
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                const iframe = document.querySelector("iframe");
-
-                // Cuando el cursor entra en el iframe
-                iframe.addEventListener("mouseenter", function() {
-                    document.body.style.overflow = 'hidden';  // Deshabilitar scroll
-                });
-
-                // Cuando el cursor sale del iframe
-                iframe.addEventListener("mouseleave", function() {
-                    document.body.style.overflow = 'auto';  // Habilitar scroll
-                });
-            });
-        </script>
-    </head>
-    <body>
-        <header>
-            <nav>
-                <a href="index.html">Inicio</a>
-                <br><br>
-                <a href="Pupiletras.html">Pupiletras</a>
-                <br><br>
-                <a href="Laberinto.html">Laberinto</a>
-                <br><br>
-                <a href="Crucigrama.html">Crucigrama</a>
-                <br><br>
-                <a href="IndexArcano.html">Arcano</a>
-                <br><br>
-                <a href="IndexSudoku.html">Sudoku</a>
-            </nav>
-            <section class="img-header">
-                <img src="CSS/Imagenes/Logo_Play_Zone3.png" alt="Logo Play Zone">
-            </section>
-        </header>
-
-        <section class="portafolio">
-            <div class="contenedor">
-                <h2 class="titulo">Crucigrama</h2>
-
-                <!-- Inserción del Laberinto2 dentro de Laberinto1 usando un iframe -->
-                <section>
-                    <iframe src="Crucigrama1a.html"></iframe>
-                </section>
-            </div>
+        /* Estilos para el iframe */
+        iframe {
+            width: 100%;
+            height: 100vh; /* Usa toda la altura visible */
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <br><br>
+            <a href="Pupiletras.html">Pupiletras</a>
+            <br><br>
+            <a href="Laberinto.html">Laberinto</a>
+            <br><br>
+            <a href="Crucigrama.html">Crucigrama</a>
+            <br><br>
+            <a href="IndexArcano.html">Arcano</a>
+            <br><br>
+            <a href="IndexSudoku.html">Sudoku</a>
+        </nav>
+        <section class="img-header">
+            <img src="CSS/Imagenes/Logo_Play_Zone3.png" alt="Logo Play Zone">
         </section>
+    </header>
 
-        <footer>
-            <div class="contenedor-footer">
-                <div class="content-foo">
-                    <h4>Phone</h4>
-                    <p>969469253</p>
-                </div>
-                <div class="content-foo">
-                    <h4>Email</h4>
-                    <p>eduardoribeyro@yahoo.es</p>
-                </div>
-                <div class="content-foo">
-                    <h4>Location</h4>
-                    <p>Lima-Perú</p>
-                </div>
+    <section class="portafolio">
+        <div class="contenedor">
+            <h2 class="titulo">Crucigrama</h2>
+
+            <!-- Inserción del Crucigrama1a dentro de Crucigrama1 usando un iframe -->
+            <section>
+                <iframe src="Crucigrama1a.html" loading="lazy"></iframe>
+            </section>
+        </div>
+    </section>
+
+    <footer>
+        <div class="contenedor-footer">
+            <div class="content-foo">
+                <h4>Phone</h4>
+                <p>969469253</p>
             </div>
-            <h2 class="titulo-final">&copy; Play Zone</h2>
-        </footer>
-    </body>
+            <div class="content-foo">
+                <h4>Email</h4>
+                <p>eduardoribeyro@yahoo.es</p>
+            </div>
+            <div class="content-foo">
+                <h4>Location</h4>
+                <p>Lima-Perú</p>
+            </div>
+        </div>
+        <h2 class="titulo-final">&copy; Play Zone</h2>
+    </footer>
+</body>
 </html>
