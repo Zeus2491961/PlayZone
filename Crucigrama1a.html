@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crucigrama</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #titulo {
+            text-align: center;
+            font-family: Impact, sans-serif;
+            color: #990606;
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+
+        #contenedor {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            width: 100%;
+            max-width: 900px; /* Evita que el contenido se expanda demasiado */
+        }
+        
+        #preguntas {
+            width: 300px;
+            order: 1;
+            overflow-y: auto;
+        }
+
+        #crucigrama {
+            border-collapse: collapse;
+            border: 1px solid black;
+            background-color: white;
+        }
+
+        #crucigrama td {
+            width: 30px;
+            height: 30px;
+            border: 1px solid black;
+            text-align: center;
+            font-size: 14px;
+            position: relative;
+        }
+
+        #crucigrama input {
+            border: none;
+            background-color: transparent;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            font-size: 14px;
+            color: black;
+        }
+
+        #crucigrama .blue {
+            background-color: #E0F2F7;
+        }
+
+        #crucigrama .number {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            font-size: 10px;
+            color: #666;
+        }
+
+        #crucigrama .gray {
+            background-color: #837979;
+        }
+
+        .mensaje-final {
+            display: none;
+            font-size: 24px;
+            font-weight: bold;
+            color: green;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="titulo">Crucigrama</h1>
+    <div id="contenedor">
+        <table id="crucigrama">
+            <!-- Aquí se generará dinámicamente el crucigrama -->
+        </table>
+        
+        <div id="preguntas">
+            <h2>Horizontales</h2>
+            <div>H1: Pref. pluralidad</div>
+            <div>H5: Dueño, señor</div>
+            <div>H8: Lado izq. del barco</div>
+            <div>H12: Que encierra un enigma</div>
+            <div>H15: Ganso domestico</div>
+            <!-- Agrega más preguntas según sea necesario -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const crucigrama = document.getElementById("crucigrama");
+
+            for (let i = 0; i < 14; i++) {
+                let fila = crucigrama.insertRow();
+                for (let j = 0; j < 14; j++) {
+                    let celda = fila.insertCell();
+                    let input = document.createElement("input");
+                    celda.appendChild(input);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
