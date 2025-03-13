@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Preguntas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f8ff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #score {
+            font-size: 24px;
+            font-weight: bold;
+            color: red;
+            margin-bottom: 20px;
+        }
+        .question-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            max-width: 600px;
+            text-align: left;
+        }
+        img {
+            width: 300px;
+            height: auto;
+        }
+        .question-content {
+            width: 100%;
+            text-align: center;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .correct {
+            background-color: green !important;
+            color: white;
+        }
+        .incorrect {
+            background-color: red !important;
+            color: white;
+        }
+        #finalMessage {
+            display: none;
+            color: red;
+            font-size: 2em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Juego de Preguntas</h2>
+    <div id="score">Puntos: 0</div>
+    <div class="question-container">
+        <img id="questionImage" src="CSS/Imagenes/Icono.Conocimiento.jpg" alt="Imagen de la pregunta">
+        <div class="question-content">
+            <h2 id="questionText"></h2>
+            <button onclick="checkAnswer(0)" id="btn0"></button>
+            <button onclick="checkAnswer(1)" id="btn1"></button>
+            <button onclick="checkAnswer(2)" id="btn2"></button>
+            <button onclick="checkAnswer(3)" id="btn3"></button>
+        </div>
+    </div>
+    <h1 id="finalMessage"></h1>
+    
+    <script>
+        const questions = [
+            {
+                image: "CSS/Imagenes/Icono.Conocimiento.jpg",
+                text: "¿Cuál es la capital de Francia?",
+                answers: ["Madrid", "Berlín", "París", "Lisboa"],
+                correct: 2
+            },
+            {
+                image: "CSS/Imagenes/Icono.Conocimiento.jpg",
+                text: "¿Cuántos lados tiene un hexágono?",
+                answers: ["5", "6", "7", "8"],
+                correct: 1
+            },
+            {
+                image: "CSS/Imagenes/Icono.Conocimiento.jpg",
+                text: "¿Quién pintó la Mona Lisa?",
+                answers: ["Van Gogh", "Picasso", "Da Vinci", "Rembrandt"],
+                correct: 2
+            },
+            {
+                image: "CSS/Imagenes/Icono.Conocimiento.jpg",
+                text: "¿En qué año ganó Argentina su primer Mundial de Fútbol?",
+                answers: ["1978", "1986", "1990", "2002"],
+                correct: 0
+            },
+            {
+                image: "CSS/Imagenes/Icono.Conocimiento.jpg",
+                text: "¿Cuál fue la primera película animada de Disney?",
+                answers: ["La Bella y la Bestia", "Blancanieves y los siete enanitos", "Pinocho", "Dumbo"],
+                correct: 1
+            },
+            {
+                image: "CSS/Imagenes/Icono.Conocimiento.jpg",
+                text: "¿Qué planeta es el más grande del sistema solar?",
+                answers: ["Saturno", "Neptuno", "Júpiter", "Urano"],
+                correct: 2
+            },
+            {
+                image: "CSS/Imagenes/Icono.Conocimiento.jpg",
+                text: "¿Cómo se llama el líder de la banda The Beatles?",
+                answers: ["Ringo Starr", "George Harrison", "Paul McCartney", "John Lennon"],
+                correct: 3
+            },
+            {
+                image: "CSS/Imagenes/Icono.Conocimiento.jpg",
+                text: "¿Cuántos jugadores forman un equipo de básquet?",
+                answers: ["8", "6", "7", "5"],
+                correct: 3
+            },
+            {
+                image: "CSS/Imagenes/Icono.Conocimiento.jpg",
+                text: "¿Quién dirigió la trilogía de El Señor de los Anillos?",
+                answers: ["James Cameron", "Christopher Nolan", "Peter Jackson", "Steven Spielberg"],
+                correct: 2
+            },
+            {
+                image: "Imagenes/BlancaVarela.jpg",
+                text: "¿Qué poetisa peruana aparece en la foto?",
+                answers: ["Magda Portal", "Ida Vitale", "Blanca Varela", "Gioconda Belli"],
+                correct: 2
+            }
+        ];
+        
+        let score = 0;
+        let currentQuestion = 0;
+        
+        function loadQuestion() {
+            let q = questions[currentQuestion];
+            document.getElementById("questionImage").src = q.image;
+            document.getElementById("questionText").innerText = q.text;
+            for (let i = 0; i < 4; i++) {
+                let btn = document.getElementById("btn" + i);
+                btn.innerText = q.answers[i];
+                btn.className = "";
+                btn.disabled = false;
+            }
+        }
+        
+        function checkAnswer(index) {
+            let q = questions[currentQuestion];
+            let btn = document.getElementById("btn" + index);
+            if (index === q.correct) {
+                btn.classList.add("correct");
+                score += 10;
+            } else {
+                btn.classList.add("incorrect");
+            }
+            document.getElementById("score").innerText = "Puntos: " + score;
+            setTimeout(nextQuestion, 1000);
+        }
+        
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion >= questions.length) {
+                document.getElementById("finalMessage").innerText = "¡Ganaste " + score + " puntos!";
+                document.getElementById("finalMessage").style.display = "block";
+            } else {
+                loadQuestion();
+            }
+        }
+        
+        loadQuestion();
+    </script>
+</body>
+</html>
